@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="ChordsKaraoke.Creator.Views.TimeRulerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="50" d:DesignWidth="300" MinHeight="50" IsHitTestVisible="False">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="50*" />
+        </Grid.RowDefinitions>
+        <Rectangle Fill="Black" Grid.RowSpan="2" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="1" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="2" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="3" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="4" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="5" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="6" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="7" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="8" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <Rectangle Grid.Row="0" Grid.Column="9" Fill="Black" Width="1" HorizontalAlignment="Left" />
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="9" TextAlignment="Left" Text="{Binding Path=Time}"
+                   FontSize="18" FontWeight="DemiBold" IsHitTestVisible="False" />
+    </Grid>
+</UserControl>

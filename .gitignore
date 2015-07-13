@@ -1,0 +1,7 @@
+*.user
+*.suo
+*.psess
+*.vsp
+*.DotSettings
+obj
+bin

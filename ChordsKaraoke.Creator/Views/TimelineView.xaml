@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ChordsKaraoke.Creator.Views.TimelineView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:ChordsKaraoke.Creator.Views"
+             xmlns:viewModels="clr-namespace:ChordsKaraoke.Data.ViewModels;assembly=ChordsKaraoke.Data"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key="TextItemTemplate" DataType="viewModels:TimeTextViewModel">
+            <views:TimeTextView X="{Binding Path=X, Mode=TwoWay}" Width="{Binding Path=Width, Mode=TwoWay}"
+                                IsSelected="{Binding Path=IsSelected, Mode=TwoWay}" />
+        </DataTemplate>
+        <views:LeftMarginConverter x:Key="MarginConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="+" Command="{Binding Path=ZoomInCommand}" />
+            <MenuItem Header="-" Command="{Binding Path=ZoomOutCommand}" />
+            <MenuItem Header="F#" Command="{Binding Path=AddChordCommand}" />
+            <MenuItem Header="Lyrics" Command="{Binding Path=AddTextCommand}" />
+            <MenuItem Header="Copy" Command="{Binding Path=CopyCommand}" />
+            <MenuItem Header="Delete" Command="{Binding Path=RemoveItemsCommand}" />
+        </Menu>
+        <ScrollViewer Name="ScrollViewer" Grid.Row="1" HorizontalScrollBarVisibility="Visible"
+                      VerticalScrollBarVisibility="Auto" PreviewMouseWheel="MouseWheelChange"
+                      PreviewMouseDown="MouseLeftDown" PreviewMouseUp="MouseLeftUp"
+                      PreviewMouseMove="MouseStateChanges">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Rectangle Grid.RowSpan="4" Fill="Red" Width="2"
+                           Margin="{Binding Path=CurrentPosition, Mode=OneWay, Converter={StaticResource MarginConverter}}"
+                           VerticalAlignment="Stretch" HorizontalAlignment="Left" />
+                <views:TimelineRowView Grid.Row="1" ItemsSource="{Binding Path=Time}" MaxX="{Binding Path=MaxX}"
+                                       IsHitTestVisible="False">
+                    <views:TimelineRowView.RowItemTemplate>
+                        <DataTemplate DataType="viewModels:TimeTextViewModel">
+                            <views:TimeRulerView Width="{Binding Path=Width, Mode=OneWay}" />
+                        </DataTemplate>
+                    </views:TimelineRowView.RowItemTemplate>
+                </views:TimelineRowView>
+                <views:TimelineRowView Grid.Row="2" ItemsSource="{Binding Path=Chords}" MaxX="{Binding Path=MaxX}"
+                                       RowItemTemplate="{StaticResource TextItemTemplate}" IsHitTestVisible="True" />
+                <views:TimelineRowView Grid.Row="3" ItemsSource="{Binding Path=Lyrics}" MaxX="{Binding Path=MaxX}"
+                                       RowItemTemplate="{StaticResource TextItemTemplate}" IsHitTestVisible="True" />
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
